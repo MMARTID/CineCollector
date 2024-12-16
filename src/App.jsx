@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import "./App.css";
-import logo from "./assets/logo.webp";
+
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <>
@@ -16,7 +16,7 @@ function App() {
 
         <Route path="/myMovies" />
       </Routes>
-
+      <Footer />
      
     </>
   );
