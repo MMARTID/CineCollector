@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "axios"
+import { Link } from "react-router-dom";
 
 function MoviesList() {
   const [movies, setMovies] = useState([]);
@@ -88,6 +89,7 @@ function MoviesList() {
                 </div>
                 
                 <p>{movie.Year}</p>
+                <Link to={`/movie/${movie.imdbID}`}>Ver detalles</Link>
               </div>
             ))}
           </div>
