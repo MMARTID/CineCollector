@@ -1,16 +1,14 @@
 const footerStyles = {
     container: {
       display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: "10px 20px",
-      backgroundColor: "#222", 
-      position: "fixed", 
-      bottom: "0", 
-      left: "0",
-      right: "0",
-      zIndex: "1000", 
-      borderTop: "1px solid #444"
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "10px 20px",
+    backgroundColor: "#222",
+    color: "#fff",
+    borderTop: "1px solid #444",
+    marginTop: "auto", // Empuja el footer al final
+    boxShadow: "0 -2px 4px rgba(0, 0, 0, 0.1)"
     },
     text: {
       color: "#fff", 
