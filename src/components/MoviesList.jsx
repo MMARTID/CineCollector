@@ -44,57 +44,56 @@ function MoviesList() {
   console.log(movies);
   return (
     <>
+       <div className="container py-5">
+      {/* Input de búsqueda */}
+      <div className="mb-4 text-center">
         <input
           onChange={handleInputChange}
           value={inputValue}
           placeholder="Buscar película..."
-          style={{ padding: "8px", width: "300px", margin: "20px 0" }}
+          className="form-control mx-auto"
+          style={{ maxWidth: "400px" }}
         />
-        <div style={pageStyles}>
-        {/* loading */}
-        {loading && <p>Cargando...</p>}
+      </div>
 
-        {/*  error */}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+      {/* Loading */}
+      {loading && <p className="text-center">Cargando...</p>}
 
-        {!loading && !error && movies.length > 0 && (
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "20px",
-              justifyContent: "center",
-            }}>
-              
-            {movies.map((movie) => (
-              <div
-                key={movie.imdbID}
-                style={{
-                  border: "1px solid #ddd",
-                  padding: "10px",
-                  textAlign: "center",
-                }}>
+      {/* Error */}
+      {error && <p className="text-danger text-center">{error}</p>}
 
+      {/* Lista de películas */}
+      {!loading && !error && movies.length > 0 && (
+        <div className="row justify-content-center">
+          {movies.map((movie) => (
+            <div key={movie.imdbID} className="col-md-3 col-sm-6 mb-4">
+              <div className="card h-100 shadow-sm text-center">
                 <img
                   src={
-                    movie.Poster 
+                    movie.Poster
                       ? movie.Poster
                       : "https://via.placeholder.com/200"
                   }
                   alt={movie.Title}
-                  style={{ width: "200px", height: "auto" }}
+                  className="card-img-top"
+                  style={{ height: "300px", objectFit: "cover" }}
                 />
-                <div style={{width: '180px'}}>
-                  <h3>{movie.Title}</h3>
+                <div className="card-body">
+                  <h5 className="card-title">{movie.Title}</h5>
+                  <p className="card-text">{movie.Year}</p>
+                  <Link
+                    to={`/movie/${movie.imdbID}`}
+                    className="btn btn-primary"
+                  >
+                    Ver detalles
+                  </Link>
                 </div>
-                
-                <p>{movie.Year}</p>
-                <Link to={`/movie/${movie.imdbID}`}>Ver detalles</Link>
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
     </>
   );
 }

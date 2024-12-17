@@ -17,76 +17,35 @@ function MyMoviesServer() {
 
 
     const handleDelete = {
-    
+    //! logica para elimnar!
     }
-    const styles = {
-        page: {
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          minHeight: "100vh",
-          backgroundColor: "#F8F8F8",
-          padding: "20px",
-          fontFamily: "'Arial', sans-serif",
-        },
-        card: {
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "80%",
-          backgroundColor: "#FFF",
-          margin: "10px 0",
-          padding: "15px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-          borderRadius: "8px",
-        },
-        image: {
-          width: "80px",
-          height: "120px",
-          borderRadius: "4px",
-          objectFit: "cover",
-          marginRight: "15px",
-        },
-        title: {
-          flex: "1",
-          fontSize: "1.2rem",
-          fontWeight: "bold",
-          color: "#333",
-        },
-        button: {
-          backgroundColor: "#FF4C4C",
-          color: "#FFF",
-          border: "none",
-          borderRadius: "4px",
-          padding: "8px 12px",
-          cursor: "pointer",
-          fontSize: "1rem",
-          transition: "background-color 0.3s ease",
-        },
-        buttonHover: {
-          backgroundColor: "#E63946",
-        },
-      }
     return(
-        <div style={styles.page}>
-        {db.map((eachMovie) => (
-          <div key={eachMovie.id} style={styles.card}>
-            <img
-              src={eachMovie.Poster}
-              alt={eachMovie.Title}
-              style={styles.image}
-            />
-            <p style={styles.title}>{eachMovie.Title}</p>
-            <button
-              onClick
-              style={styles.button}
-            >
-              Borrar
-            </button>
+        <div className="container my-5">
+      <h1 className="text-center mb-4">Mis Películas</h1>
+      {db.map((eachMovie) => (
+        <div
+          key={eachMovie.id}
+          className="card mb-3 shadow-sm d-flex flex-row align-items-center p-3"
+          style={{ maxWidth: "600px", margin: "0 auto" }}
+        >
+          <img
+            src={eachMovie.Poster}
+            alt={eachMovie.Title}
+            className="img-thumbnail me-3"
+            style={{ width: "80px", height: "120px", objectFit: "cover" }}
+          />
+          <div className="flex-grow-1">
+            <h5 className="mb-0">{eachMovie.Title}</h5>
           </div>
-        ))}
-      </div>
+          <button
+            className="btn btn-danger"
+            onClick={() => handleDelete(eachMovie.id)}
+          >
+            Borrar
+          </button>
+        </div>
+      ))}
+    </div>
       
 
     )
