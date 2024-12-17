@@ -1,28 +1,24 @@
+import { useEffect } from 'react'
 import MoviesList from '../components/MoviesList'
+import axios from 'axios'
 function Home() {
 
-  const pageStyles = {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh", 
-    backgroundColor: "#F8F8F8" 
-    
-  }
-
-  const contentStyles = {
-    flex: "1",
-    padding: "20px",
-    width: '100%'
-  }
+useEffect(() => {
+  axios.get('http://www.omdbapi.com/?apikey=57a961e0&s=movie&type=movie&y=2023&page=1')
+  .then((response) => {
+    console.log(response.data)
+  })
+  .catch((err) => {
+      console.log(err)
+    })
+}, [])
 
   return (
-    <div style={pageStyles}>
-      <main style={contentStyles}>
-        <h1 style={{ textAlign: "center", marginBottom: "20px" }}>Home</h1>
-          
-      </main>
-      
-    </div>
+  <>
+   <h1 style={{ textAlign: "center", marginBottom: "20px" }}>Home</h1>
+
+  </>
+       
   )
 }
 export default Home

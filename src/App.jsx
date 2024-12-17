@@ -15,14 +15,20 @@ function App() {
 
   return (
     <>
+    <div className="d-flex flex-column min-vh-100">
       <Header />
-      <Routes>
+      <main className="flex-fill d-flex justify-content-center align-items-center">
+        <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/searchMovies" element={<MoviesList/>} />
         <Route path="/myMovies" element={<MyMoviesServer/>}/>
         <Route path="/movie/:id" element={<MovieDetails />} />
       </Routes>
+      </main>
+      
       <Footer />
+    </div>
+      
      
     </>
   );
