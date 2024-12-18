@@ -6,7 +6,7 @@ function Home() {
   const [ moviesByYear, setMoviesByYear ] = useState([])
 
 useEffect(() => {
-  axios.get('http://www.omdbapi.com/?apikey=57a961e0&s=movie&type=movie&y=2024&page=1')
+  axios.get('https://www.omdbapi.com/?apikey=57a961e0&s=movie&type=movie&y=2024&page=1')
   .then((response) => {
     console.log(response.data)
     setMoviesByYear(response.data.Search)

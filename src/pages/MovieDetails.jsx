@@ -13,7 +13,7 @@ function MovieDetail() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    axios.get(`http://www.omdbapi.com/?apikey=57a961e0&i=${id}`)
+    axios.get(`https://www.omdbapi.com/?apikey=57a961e0&i=${id}`)
       .then((response) => setMovie(response.data))
       .catch((error) =>  console.error(error))
       .finally(() => setLoading(false));
@@ -29,7 +29,7 @@ function MovieDetail() {
       imdbID: movie.imdbID
     };
 
-    axios.post("http://localhost:5005/movies", newMovie)
+    axios.post(`${import.meta.env.VITE_SERVER_URL}/movies`, newMovie)
       .then(response => {
         console.log("Movie added:", response.data)
 

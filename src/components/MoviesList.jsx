@@ -16,7 +16,7 @@ function MoviesList() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    axios.get(`http://www.omdbapi.com/?apikey=57a961e0&s=${inputValue}&page=1`)
+    axios.get(`https://www.omdbapi.com/?apikey=57a961e0&s=${inputValue}&page=1`)
       .then((response) => {
         console.log(response.data);
         if (response.data.Response === "True") {
