@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
+import { meta } from "@eslint/js"
 
 function MyMoviesServer() {
     const [db, setDb] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:5005/db')
+        axios.get(`${import.meta.env.VITE_SERVER_URL}/db`)
         .then((response) => {
             setDb(response.data.movies)
         })
@@ -17,7 +18,7 @@ function MyMoviesServer() {
 
 
     const handleDelete = {
-    //! logica para elimnar!
+    //! logica para alñimina!
     }
     return(
         <div className="container my-5">
