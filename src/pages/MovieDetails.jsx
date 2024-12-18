@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ReviewList from "../components/ReviewList";
 import { useParams } from "react-router-dom";
 
 function MovieDetail() {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [saved, setSaved] = useState(false); // Estado para saber si la película fue guardada
-
+  const [saved, setSaved] = useState(false); 
   const { id } = useParams();
 
   useEffect(() => {
     setLoading(true);
     setError(null);
     axios.get(`https://www.omdbapi.com/?apikey=57a961e0&i=${id}`)
-      .then((response) => setMovie(response.data))
+      .then((response) => {setMovie(response.data) 
+        console.log(response.data)})
+      
       .catch((error) =>  console.error(error))
       .finally(() => setLoading(false));
   }, [id]);
@@ -106,6 +108,7 @@ function MovieDetail() {
     };
 
   return (
+    <div>
     <div style={styles.container}>
       <img src={movie.Poster} alt={movie.Title} style={styles.poster} />
       <div style={styles.details}>
@@ -134,7 +137,10 @@ function MovieDetail() {
             Añadir a la base de datos
           </button>
         )}
+      
       </div>
+    </div>
+      <ReviewList/>
     </div>
   );
 }

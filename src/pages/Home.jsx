@@ -4,7 +4,14 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 function Home() {
   const [ moviesByYear, setMoviesByYear ] = useState([])
+  const [review, setReview] = useState([])
 
+  useEffect(() => {
+    axios.get('https://www.omdbapi.com/?apikey=57a961e0&t=avatar')
+    .then((response) => {
+      console.log('jhuj',response.data)
+    })
+  },[])
 useEffect(() => {
   axios.get('https://www.omdbapi.com/?apikey=57a961e0&s=movie&type=movie&y=2024&page=1')
   .then((response) => {
