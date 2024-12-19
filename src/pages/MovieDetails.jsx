@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ReviewList from "../components/ReviewList";
+import AddMovie from '../components/AddMovie'
 import { useParams } from "react-router-dom";
+import { MdSave } from "react-icons/md";
 
 function MovieDetail() {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [saved, setSaved] = useState(false); 
-  const { id } = useParams();
+  const {id } = useParams();
 
   useEffect(() => {
     setLoading(true);
@@ -16,7 +18,6 @@ function MovieDetail() {
     axios.get(`https://www.omdbapi.com/?apikey=57a961e0&i=${id}`)
       .then((response) => {setMovie(response.data) 
         console.log(response.data)})
-      
       .catch((error) =>  console.error(error))
       .finally(() => setLoading(false));
   }, [id]);
@@ -28,7 +29,7 @@ function MovieDetail() {
       Title: movie.Title,
       Type: movie.Type,
       Year: movie.Year,
-      imdbID: movie.imdbID
+      ImdbID: movie.imdbID
     };
 
     axios.post(`${import.meta.env.VITE_SERVER_URL}/movies`, newMovie)
@@ -43,104 +44,55 @@ function MovieDetail() {
   };
 
   if (loading) return <p>Cargando...</p>;
-    const styles = {
-    container: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "flex-start",
-        justifyContent: "center",
-        backgroundColor: "#F5F5F5",
-        padding: "30px",
-        margin: "20px auto",
-        borderRadius: "12px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-        maxWidth: "900px",
-        gap: "30px",
-        fontFamily: "'Arial', sans-serif",
-    },
-    poster: {
-        width: "300px",
-        height: "auto",
-        borderRadius: "8px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    },
-    details: {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-start",
-        alignItems: "flex-start",
-        flex: 1,
-    },
-    title: {
-        fontSize: "2rem",
-        fontWeight: "bold",
-        marginBottom: "10px",
-        color: "#333",
-    },
-    text: {
-        fontSize: "1rem",
-        color: "#555",
-        marginBottom: "8px",
-        lineHeight: "1.5",
-    },
-    button: {
-        marginTop: "15px",
-        backgroundColor: "#3D8361",
-        color: "#FFF",
-        border: "none",
-        borderRadius: "5px",
-        padding: "10px 15px",
-        cursor: "pointer",
-        fontSize: "1rem",
-        transition: "background-color 0.3s ease",
-    },
-    savedMessage: {
-        color: "#2C6E49",
-        marginTop: "10px",
-        fontWeight: "bold",
-    },
-    loading: {
-        fontSize: "1.5rem",
-        color: "#3D8361",
-        textAlign: "center",
-        marginTop: "50px",
-    },
-    };
 
   return (
-    <div>
-    <div style={styles.container}>
-      <img src={movie.Poster} alt={movie.Title} style={styles.poster} />
-      <div style={styles.details}>
-        <h2 style={styles.title}>
-          {movie.Title} ({movie.Year})
-        </h2>
-        <p style={styles.text}>
-          <strong>Genre:</strong> {movie.Genre}
-        </p>
-        <p style={styles.text}>
-          <strong>Plot:</strong> {movie.Plot}
-        </p>
-        <p style={styles.text}>
-          <strong>Director:</strong> {movie.Director}
-        </p>
-        <p style={styles.text}>
-          <strong>Actors:</strong> {movie.Actors}
-        </p>
-        {saved ? (
-          <p style={styles.savedMessage}>¡Película añadida a la base de datos!</p>
-        ) : (
-          <button
-            style={styles.button}
-            onClick={handleAddMovie}
-          >
-            Añadir a la base de datos
-          </button>
-        )}
-      
+    <div className="container my-5">
+      <div className="row align-items-start bg-light shadow rounded p-4">
+        {/* IMAGEN */}
+        <div className="col-md-4 mb-3">
+          <img 
+            src={movie.Poster} 
+            alt={movie.Title} 
+            className="img-fluid rounded shadow" 
+          />
+          <p>{movie.imdbVotes} people vote this</p>
+        </div>
+        {/* DESCRIPCION */}
+        <div className="col-md-8 text-lg-start">
+          <div>
+            <h2 className="fw-bold text-primary">
+            {movie.Title} <span className="text-secondary"></span>
+          </h2>
+          
+          </div>
+          
+          <p>{movie.Year} · {movie.Rated} · {movie.Runtime}</p>
+          <p>{movie.Genre}</p>
+          <p><strong>Sinopsis:</strong> {movie.Plot}</p>
+          <p><strong>Director:</strong> {movie.Director}</p>
+          <p><strong>Actores:</strong> {movie.Actors}</p>
+          <p><strong>Writers</strong> {movie.Writer}</p>
+
+          {saved ? (
+            <p className="text-success fw-bold">¡Película añadida!</p>
+          ) : (
+            <button 
+              className="btn btn-success mt-3"
+              onClick={handleAddMovie}
+            >
+              <MdSave/>
+            </button>
+          )}
+          
+          
+        </div>
       </div>
-    </div>
-      <ReviewList/>
+      {/* RESEÑAS */}
+      <div className="mt-5"> 
+        <AddMovie/>
+        <ReviewList />
+       
+      </div>
     </div>
   );
 }

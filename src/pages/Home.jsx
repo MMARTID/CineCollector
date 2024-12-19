@@ -1,28 +1,21 @@
 import { useEffect, useState } from 'react'
-import MoviesList from '../components/MoviesList'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 function Home() {
-  const [ moviesByYear, setMoviesByYear ] = useState([])
-  const [review, setReview] = useState([])
+  const [ movies, setMovies ] = useState([])
 
-  useEffect(() => {
-    axios.get('https://www.omdbapi.com/?apikey=57a961e0&t=avatar')
-    .then((response) => {
-      console.log('jhuj',response.data)
-    })
-  },[])
+
 useEffect(() => {
-  axios.get('https://www.omdbapi.com/?apikey=57a961e0&s=movie&type=movie&y=2024&page=1')
+  axios.get('https://www.omdbapi.com/?apikey=57a961e0&s=movie&type=movie&page=1')
   .then((response) => {
-    console.log(response.data)
-    setMoviesByYear(response.data.Search)
+    setMovies(response.data.Search)
+    
   })
   .catch((err) => {
       console.log(err)
     })
 }, [])
-console.log(moviesByYear)
+console.log(movies)
 
   return (
     <>
@@ -31,13 +24,11 @@ console.log(moviesByYear)
    
     <h1 className="text-center mb-4">Más recientes</h1>  
     
-    {moviesByYear && moviesByYear.length > 0 ? (
+    {movies && movies.length > 0 ? (
       <div className="container">
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4"> 
-          {/* row-cols-1: 1 columna en pantallas pequeñas, row-cols-md-3: 3 columnas en pantallas medianas */}
-          {moviesByYear.map((eachMovie) => (
+        <div className="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4"> 
+          {movies.map((eachMovie) => (
             <div key={eachMovie.imdbID} className="col">
-              {/* Tarjeta de Bootstrap para cada película */}
               <div className="card">
                 <Link to={`/movie/${eachMovie.imdbID}`}>
                  <img 

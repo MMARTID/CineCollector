@@ -84,6 +84,7 @@ function MoviesList() {
                   <Link
                     to={`/movie/${movie.imdbID}`}
                     className="btn btn-primary"
+                    
                   >
                     Ver detalles
                   </Link>
