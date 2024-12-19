@@ -19,6 +19,7 @@ function ReviewList ( ) {
         axios.get(`${import.meta.env.VITE_SERVER_URL}/reviews?imdbID=${id}`)
         .then((response) => {
             setDbReview(response.data)
+            console.log('hihihhihi', dbReview)
         })
         .catch((e) => {
             console.log(e)
