@@ -22,7 +22,6 @@ function MovieDetail() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  if (loading) return <p>Cargando...</p>
   const handleAddMovie = () => {
     const newMovie = {
       Poster: movie.Poster,

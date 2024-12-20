@@ -19,13 +19,13 @@ function ReviewList ( ) {
         axios.get(`${import.meta.env.VITE_SERVER_URL}/reviews?imdbID=${id}`)
         .then((response) => {
             setDbReview(response.data)
-            console.log('hihihhihi', dbReview)
+
         })
         .catch((e) => {
             console.log(e)
         })
-    },[id])
-console.log(`${import.meta.env.VITE_SERVER_URL}/reviews/1}`)
+    },[singleReview])
+    console.log(`${import.meta.env.VITE_SERVER_URL}/reviews?imdbID=${id}`)
     return(
         <>
         <h1 className="text-center my-4">Reseñas de la API</h1>

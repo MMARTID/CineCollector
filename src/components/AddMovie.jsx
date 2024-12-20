@@ -4,14 +4,13 @@ import { useParams } from "react-router-dom"
 
 function AddMovie() {
  const {id} = useParams()
-    const [submit,setSubmit] = useState(false)
+    //const [submit,setSubmit] = useState(false)
     const [reviewForm, setReviewForm] = useState({
             Reviewer: '',
             Opinion: '',
             Score: '',
             imdbID: id
         })
-    
     
 
     const handleChange = e => {
@@ -21,20 +20,22 @@ function AddMovie() {
         })
     }
     const handleSubmit = (e) => {
-        setSubmit(true)
-    }
-    
-    useEffect(() => {
-    if (submit){
-        axios.post(`${import.meta.env.VITE_SERVER_URL}/reviews`, reviewForm)
+        //setSubmit(true)
+         axios.post(`${import.meta.env.VITE_SERVER_URL}/reviews`, reviewForm)
         .then((response) => {
+          console.log('hola')
             console.log('review added:',response.data)
         })
         .catch((err) => {
             console.log(err)
         })
     }
-    },[submit])
+    
+    // useEffect(() => {
+    // if (submit){
+       
+    // }
+    // },[submit])
 
     console.log(reviewForm)
 
