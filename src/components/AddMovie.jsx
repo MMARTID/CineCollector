@@ -30,12 +30,7 @@ function AddMovie() {
             console.log(err)
         })
     }
-    
-    // useEffect(() => {
-    // if (submit){
-       
-    // }
-    // },[submit])
+
 
     console.log(reviewForm)
 

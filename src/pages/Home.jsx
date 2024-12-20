@@ -6,7 +6,7 @@ function Home() {
 
 
 useEffect(() => {
-  axios.get('https://www.omdbapi.com/?apikey=57a961e0&s=movie&type=movie&page=1')
+  axios.get(`https://www.omdbapi.com/?apikey=${import.meta.env.VITE_API_KEY}&s=movie&type=movie&page=1`)
   .then((response) => {
     setMovies(response.data.Search)
     
@@ -15,7 +15,6 @@ useEffect(() => {
       console.log(err)
     })
 }, [])
-console.log(movies)
 
   return (
     <>

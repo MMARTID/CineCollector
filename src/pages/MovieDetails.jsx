@@ -15,7 +15,7 @@ function MovieDetail() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    axios.get(`https://www.omdbapi.com/?apikey=57a961e0&i=${id}`)
+    axios.get(`https://www.omdbapi.com/?apikey=${import.meta.env.VITE_API_KEY}&i=${id}`)
       .then((response) => {setMovie(response.data) 
         console.log(response.data)})
       .catch((error) =>  console.error(error))

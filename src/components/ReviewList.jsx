@@ -9,7 +9,7 @@ function ReviewList ( ) {
     const [dbReview, setDbReview] = useState([])
     const { id } = useParams()
     useEffect(() => {
-        axios.get(`https://www.omdbapi.com/?apikey=57a961e0&i=${id}`)
+        axios.get(`https://www.omdbapi.com/?apikey=${import.meta.env.VITE_API_KEY}&i=${id}`)
         .then((response) => {
             console.log( 'VALORACION/ES OFICIALES:', response.data.Ratings)
             setSingleReview(response.data.Ratings)
