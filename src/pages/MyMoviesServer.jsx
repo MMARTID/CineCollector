@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { meta } from "@eslint/js"
 
 function MyMoviesServer() {
     const [db, setDb] = useState([])
@@ -14,12 +13,15 @@ function MyMoviesServer() {
             console.log(err)
         })
     }, [])
-    console.log(db)
 
 
-    const handleDelete = {
-    //! logica para alñimina!
-    }
+    const handleDelete = (id) => {
+      axios
+        .delete(`${import.meta.env.VITE_SERVER_URL}/movies/${id}`)
+        .then((response) => {
+          console.log(response)
+        });
+    };
     return(
         <div className="container my-5">
       <h1 className="text-center mb-4">Mis Películas</h1>

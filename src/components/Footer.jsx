@@ -1,29 +1,32 @@
-const footerStyles = {
-    container: {
-      display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "10px 20px",
-    backgroundColor: "#222",
-    color: "#fff",
-    borderTop: "1px solid #444",
-    marginTop: "auto", // Empuja el footer al final
-    boxShadow: "0 -2px 4px rgba(0, 0, 0, 0.1)"
-    },
-    text: {
-      color: "#fff", 
-      fontSize: "1rem",
-      textAlign: "center",
-      fontWeight: "normal"
-    },
-  }
-  
-  function Footer() {
-    return (
-      <div style={footerStyles.container}>
-        <p style={footerStyles.text}>© 2024 Cine Collector. Todos los derechos reservados.</p>
+function Footer() {
+  return (
+    <footer className="bg-dark text-light py-3 border-top mt-auto ">
+      <div className="container-fluid text-center">
+        <p className="mb-2">© 2024 Cine Collector. Todos los derechos reservados.</p>
+        <div>
+          <a
+            href="https://github.com/MMARTID"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-light mx-2"
+            style={{ textDecoration: "none" }}
+          >
+            GitHub
+          </a>
+          |
+          <a
+            href="https://www.linkedin.com/in/miguel-martin-a9050b158/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-light mx-2"
+            style={{ textDecoration: "none" }}
+          >
+            LinkedIn
+          </a>
+        </div>
       </div>
-    )
-  }
-  
-  export default Footer
+    </footer>
+  );
+}
+
+export default Footer;

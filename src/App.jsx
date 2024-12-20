@@ -17,7 +17,7 @@ function App() {
     <>
     <div className="d-flex flex-column min-vh-100">
       <Header />
-      <main className="flex-fill d-flex justify-content-center align-items-center">
+      <main className="d-flex flex-column min-vh-100 pt-5">
         <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/searchMovies" element={<MoviesList/>} />

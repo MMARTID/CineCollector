@@ -25,7 +25,6 @@ function ReviewList ( ) {
             console.log(e)
         })
     },[singleReview])
-    console.log(`${import.meta.env.VITE_SERVER_URL}/reviews?imdbID=${id}`)
     return(
         <>
         <h1 className="text-center my-4">Reseñas de la API</h1>

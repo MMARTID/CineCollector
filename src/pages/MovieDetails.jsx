@@ -17,7 +17,7 @@ function MovieDetail() {
     setError(null);
     axios.get(`https://www.omdbapi.com/?apikey=${import.meta.env.VITE_API_KEY}&i=${id}`)
       .then((response) => {setMovie(response.data) 
-        console.log(response.data)})
+       })
       .catch((error) =>  console.error(error))
       .finally(() => setLoading(false));
   }, [id]);

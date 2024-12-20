@@ -32,37 +32,34 @@ function MoviesList() {
       });
   }, [inputValue]);
 
-
-  const pageStyles = {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh", 
-    backgroundColor: "#F8F8F8" 
-    
-  }
-
   console.log(movies);
   return (
     <>
-       <div className="container py-5">
-      {/* Input de búsqueda */}
-      <div className="mb-4 text-center">
+    <div className="fixed-top bg-white shadow py-3" style={{ marginTop: "66px" }}>
+      <div className="container">
         <input
           onChange={handleInputChange}
           value={inputValue}
-          placeholder="Buscar película..."
+          placeholder="Search media..."
           className="form-control mx-auto"
           style={{ maxWidth: "400px" }}
         />
       </div>
+    </div>
 
-      {/* Loading */}
+    {/* contenedor principal */}
+    <div className="container d-flex flex-column justify-content-center align-items-center" style={{ marginTop: "166px" }}>
       {loading && <p className="text-center">Cargando...</p>}
 
-      {/* Error */}
-      {error && <p className="text-danger text-center">{error}</p>}
+      {/* contenido vacío inicial */}
+      {!loading && !error && movies.length === 0 && !inputValue.trim() && (
+        <div className="text-center text-muted mt-5">
+          <h3>Busca tus películas favoritas</h3>
+          <p>Escribe en el campo de búsqueda para comenzar.</p>
+        </div>
+      )}
 
-      {/* Lista de películas */}
+      {/* lista de películas */}
       {!loading && !error && movies.length > 0 && (
         <div className="row justify-content-center">
           {movies.map((movie) => (
@@ -81,11 +78,7 @@ function MoviesList() {
                 <div className="card-body">
                   <h5 className="card-title">{movie.Title}</h5>
                   <p className="card-text">{movie.Year}</p>
-                  <Link
-                    to={`/movie/${movie.imdbID}`}
-                    className="btn btn-primary"
-                    
-                  >
+                  <Link to={`/movie/${movie.imdbID}`} className="btn btn-primary">
                     Ver detalles
                   </Link>
                 </div>
@@ -95,7 +88,7 @@ function MoviesList() {
         </div>
       )}
     </div>
-    </>
+  </>
   );
 }
 
