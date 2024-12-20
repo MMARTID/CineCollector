@@ -37,7 +37,7 @@ function MyMoviesServer() {
           console.log("Película marcada como favorita:", response.data);
         })
         .catch((err) => {
-          console.log("Error al marcar como favorita:", err);
+          console.log(err);
         });
     };
 
