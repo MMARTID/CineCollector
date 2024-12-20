@@ -28,7 +28,8 @@ function MovieDetail() {
       Title: movie.Title,
       Type: movie.Type,
       Year: movie.Year,
-      ImdbID: movie.imdbID
+      ImdbID: movie.imdbID,
+      favorite: false
     };
 
     axios.post(`${import.meta.env.VITE_SERVER_URL}/movies`, newMovie)

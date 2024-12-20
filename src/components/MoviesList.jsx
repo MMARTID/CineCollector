@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios"
 import { Link } from "react-router-dom";
+import MovieCard from './MovieCard'
 
 function MoviesList() {
   const [movies, setMovies] = useState([]);
@@ -31,6 +32,7 @@ function MoviesList() {
         setLoading(false);
       });
   }, [inputValue]);
+  
 
   console.log(movies);
   return (
@@ -52,7 +54,7 @@ function MoviesList() {
       {loading && <p className="text-center">Cargando...</p>}
 
       {/* contenido vacío inicial */}
-      {!loading && !error && movies.length === 0 && !inputValue.trim() && (
+      {!loading && movies.length === 0 && (
         <div className="text-center text-muted mt-5">
           <h3>Busca tus películas favoritas</h3>
           <p>Escribe en el campo de búsqueda para comenzar.</p>
@@ -62,30 +64,10 @@ function MoviesList() {
       {/* lista de películas */}
       {!loading && !error && movies.length > 0 && (
         <div className="row justify-content-center">
-          {movies.map((movie) => (
-            <div key={movie.imdbID} className="col-md-3 col-sm-6 mb-4">
-              <div className="card h-100 shadow-sm text-center">
-                <img
-                  src={
-                    movie.Poster
-                      ? movie.Poster
-                      : "https://via.placeholder.com/200"
-                  }
-                  alt={movie.Title}
-                  className="card-img-top"
-                  style={{ height: "300px", objectFit: "cover" }}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{movie.Title}</h5>
-                  <p className="card-text">{movie.Year}</p>
-                  <Link to={`/movie/${movie.imdbID}`} className="btn btn-primary">
-                    Ver detalles
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        {movies.map((movie) => (
+          <MovieCard key={movie.imdbID} movie={movie} />  
+        ))}
+      </div>
       )}
     </div>
   </>

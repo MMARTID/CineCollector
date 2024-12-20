@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import MovieCard from '../components/MovieCard'
+
+
+
 function Home() {
   const [ movies, setMovies ] = useState([])
+  const [ movies2024, setMovies2024 ] = useState([])
 
 
 useEffect(() => {
-  axios.get(`https://www.omdbapi.com/?apikey=${import.meta.env.VITE_API_KEY}&s=movie&type=movie&page=1`)
+  axios.get(`https://www.omdbapi.com/?apikey=${import.meta.env.VITE_API_KEY}&s=movie&y=2025&type=movie&page=1`)
   .then((response) => {
     setMovies(response.data.Search)
     
@@ -14,37 +19,54 @@ useEffect(() => {
   .catch((err) => {
       console.log(err)
     })
+  
 }, [])
-
+useEffect(() => {
+  axios.get(`https://www.omdbapi.com/?apikey=${import.meta.env.VITE_API_KEY}&s=movie&y=2024&type=movie&page=1`)
+  .then((response) => {
+    setMovies2024(response.data.Search)
+    
+  })
+  .catch((err) => {
+      console.log(err)
+    })
+  
+}, [])
   return (
     <>
-    <div style={{display: 'flex', flexDirection: 'column' }}>
+    <div className="container my-5 " style={{flexDirection: 'column' }}>
 
    
-    <h1 className="text-center mb-4">Más recientes</h1>  
+    <h1 className="text-center mb-4">PROXIMÓS ESTRENOS</h1>  
     
     {movies && movies.length > 0 ? (
-      <div className="container">
-        <div className="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4"> 
-          {movies.map((eachMovie) => (
-            <div key={eachMovie.imdbID} className="col">
-              <div className="card">
-                <Link to={`/movie/${eachMovie.imdbID}`}>
-                 <img 
-                  src={eachMovie.Poster} 
-                  className="card-img-top img-fluid" 
-                  alt={eachMovie.Title}
-                />
-                </Link>
-               
-                <div className="card-body">
-                  <h5 className="card-title text-center">{eachMovie.Title}</h5>
-                  <p className="card-text text-center">{eachMovie.Year}</p>
-                </div>
-              </div>
-            </div>
+      <div className="container my-5 ">
+
+        <div className="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center"> 
+          {movies.slice(0, 3).map((movie) => (
+             <MovieCard key={movie.imdbID} movie={movie} />
           ))}
         </div>
+
+      
+
+      </div>
+    ) : (
+      <p className="text-center">No se encontraron películas.</p>
+    )}
+    
+    <h1 className="text-center mb-4">DE ESTE AÑO</h1>  
+    {movies && movies.length > 0 ? (
+      <div className="container my-5 ">
+
+        <div className="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center"> 
+          {movies2024.map((movie) => (
+             <MovieCard key={movie.imdbID} movie={movie} />
+          ))}
+        </div>
+
+      
+
       </div>
     ) : (
       <p className="text-center">No se encontraron películas.</p>

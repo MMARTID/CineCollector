@@ -9,7 +9,9 @@ function AddMovie() {
             Reviewer: '',
             Opinion: '',
             Score: '',
-            imdbID: id
+            imdbID: id,
+            Favorite: false
+            
         })
     
 
@@ -42,7 +44,6 @@ function AddMovie() {
             <input
               type="text"
               className="form-control"
-              id="Reviewer"
               name="Reviewer"
               placeholder="Escribe tu nombre"
               value={reviewForm.Reviewer}
@@ -58,7 +59,6 @@ function AddMovie() {
             <input
               type="number"
               className="form-control"
-              id="Score"
               name="Score"
               min="1"
               max="10"
@@ -75,13 +75,11 @@ function AddMovie() {
             </label>
             <textarea
               className="form-control"
-              id="Opinion"
               name="Opinion"
               rows="3"
               placeholder="Escribe tu opinión sobre la película"
               value={reviewForm.Opinion}
               onChange={handleChange}
-              required
             ></textarea>
           </div>
   

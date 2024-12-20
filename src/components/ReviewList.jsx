@@ -7,6 +7,7 @@ function ReviewList ( ) {
 
     const [singleReview, setSingleReview] = useState([])
     const [dbReview, setDbReview] = useState([])
+   
     const { id } = useParams()
     useEffect(() => {
         axios.get(`https://www.omdbapi.com/?apikey=${import.meta.env.VITE_API_KEY}&i=${id}`)
@@ -19,7 +20,7 @@ function ReviewList ( ) {
         axios.get(`${import.meta.env.VITE_SERVER_URL}/reviews?imdbID=${id}`)
         .then((response) => {
             setDbReview(response.data)
-
+          
         })
         .catch((e) => {
             console.log(e)
