@@ -80,7 +80,7 @@ function MovieDetail() {
               className="btn btn-success mt-3"
               onClick={handleAddMovie}
             >
-              <MdSave/>
+              guardar <MdSave/>
             </button>
           )}
           
