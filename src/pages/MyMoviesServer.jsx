@@ -1,48 +1,47 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function MyMoviesServer() {
-    const [db, setDb] = useState([])
+  const [db, setDb] = useState([]);
+  const handleDelete = (id) => {
+    axios
+      .delete(`${import.meta.env.VITE_SERVER_URL}/movies/${id}`)
+      .then((response) => {
+        console.log(response);
+      });
+  };
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_SERVER_URL}/db`)
+      .then((response) => {
+        setDb(response.data.movies);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [handleDelete]);
 
-    useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER_URL}/db`)
-        .then((response) => {
-            setDb(response.data.movies)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }, [])
+  const handleFavorite = (id, isFavorite) => {
+    axios
+      .patch(`${import.meta.env.VITE_SERVER_URL}/movies/${id}`, {
+        Favorite: !isFavorite, // Cambiar el estado de 'Favorite'
+      })
+      .then((response) => {
+        // Actualizar la lista de películas después de cambiar el estado de 'Favorite'
+        setDb((prevDb) =>
+          prevDb.map((movie) =>
+            movie.id === id ? { ...movie, Favorite: !isFavorite } : movie
+          )
+        );
+        console.log("Película marcada como favorita:", response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-
-    const handleDelete = (id) => {
-      axios
-        .delete(`${import.meta.env.VITE_SERVER_URL}/movies/${id}`)
-        .then((response) => {
-          console.log(response)
-        });
-    };
-    const handleFavorite = (id, isFavorite) => {
-      axios
-        .patch(`${import.meta.env.VITE_SERVER_URL}/movies/${id}`, {
-          Favorite: !isFavorite, // Cambiar el estado de 'Favorite'
-        })
-        .then((response) => {
-          // Actualizar la lista de películas después de cambiar el estado de 'Favorite'
-          setDb((prevDb) =>
-            prevDb.map((movie) =>
-              movie.id === id ? { ...movie, Favorite: !isFavorite } : movie
-            )
-          );
-          console.log("Película marcada como favorita:", response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
-    return(
-        <div className="container my-5">
+  return (
+    <div className="container my-5">
       <h1 className="text-center mb-4">Mis Películas</h1>
       {db.map((eachMovie) => (
         <div
@@ -71,12 +70,9 @@ function MyMoviesServer() {
           >
             {eachMovie.Favorite ? "❤️" : "🤍"}
           </button>
-          
         </div>
       ))}
     </div>
-      
-
-    )
+  );
 }
-export default MyMoviesServer
+export default MyMoviesServer;

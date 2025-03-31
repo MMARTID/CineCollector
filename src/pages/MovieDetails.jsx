@@ -71,7 +71,7 @@ function MovieDetail() {
           <p><strong>Sinopsis:</strong> {movie.Plot}</p>
           <p><strong>Director:</strong> {movie.Director}</p>
           <p><strong>Actores:</strong> {movie.Actors}</p>
-          <p><strong>Writers</strong> {movie.Writer}</p>
+          <p><strong>Guionistas</strong> {movie.Writer}</p>
 
           {saved ? (
             <p className="text-success fw-bold">¡Película añadida!</p>

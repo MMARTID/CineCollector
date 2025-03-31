@@ -2,7 +2,7 @@ function Footer() {
   return (
     <footer className="bg-dark text-light py-3 border-top mt-auto ">
       <div className="container-fluid text-center">
-        <p className="mb-2">© 2024 Cine Collector. Todos los derechos reservados.</p>
+        <p className="mb-2">© 2024 CineCollector. Todos los derechos reservados.</p>
         <div>
           <a
             href="https://github.com/MMARTID"

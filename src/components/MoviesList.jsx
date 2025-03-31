@@ -42,7 +42,7 @@ function MoviesList() {
         <input
           onChange={handleInputChange}
           value={inputValue}
-          placeholder="Search media..."
+          placeholder="Buscar por titulo..."
           className="form-control mx-auto"
           style={{ maxWidth: "400px" }}
         />
