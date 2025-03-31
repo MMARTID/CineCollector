@@ -6,8 +6,7 @@ function MyMoviesServer() {
   const handleDelete = (id) => {
     axios
       .delete(`${import.meta.env.VITE_SERVER_URL}/movies/${id}`)
-      .then((response) => {
-        console.log(response);
+      .then(() => { setDb((prevDb) => prevDb.filter((movie) => movie.id !== id)) 
       });
   };
   useEffect(() => {
@@ -19,7 +18,7 @@ function MyMoviesServer() {
       .catch((err) => {
         console.log(err);
       });
-  }, [handleDelete]);
+  }, []);
 
   const handleFavorite = (id, isFavorite) => {
     axios
